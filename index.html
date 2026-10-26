@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Geng Kapak — Sebuah digital memory book personal dan intim untuk Hilya, Uwa, Umi, Tyan, dan Nass. Dibuat dengan penuh kasih oleh Hilya." />
+  <meta name="theme-color" content="#FAF8F5" />
+  <title>Geng Kapak — Memory Book 🪓</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪓</text></svg>" />
+
+  <!-- Open Graph / WhatsApp Preview Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Geng Kapak — Memory Book 🪓" />
+  <meta property="og:description" content="Sebuah digital memory book personal dan intim untuk Hilya, Uwa, Umi, Tyan, dan Nass. Dibuat dengan penuh kasih oleh Hilya." />
+  <meta property="og:image" content="assets/photos/pmb.jpeg" />
+
+  <!-- Typography: Playfair Display (Editorial Serif), Inter (Clean Sans), Caveat (Handwritten Marginalia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="src/css/main.css?v=20" />
+</head>
+<body>
+
+  <!-- Audio Element: "Bintang di Hati" — Melly Goeslaw (dengan Web Audio fallback) -->
+  <audio id="bg-music" src="assets/music/bintang-di-hati.mp3" preload="none"></audio>
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVIGATION BAR
+       ═══════════════════════════════════════════════════ -->
+  <header id="site-nav" role="banner">
+    <div class="nav-container">
+      <a href="#opening" class="nav-brand" aria-label="Ke halaman awal Geng Kapak">
+        <span id="kapak-icon" role="button" tabindex="0" title="Klik 5× untuk pesan rahasia!">🪓</span>
+        <span class="nav-brand-text">Geng Kapak</span>
+      </a>
+
+      <!-- Quick chapter jump menu: hanya bab yang aktif -->
+      <nav class="nav-links" id="nav-links" aria-label="Navigasi bab">
+        <a href="#the-five-of-us" class="nav-link">Tentang Kita</a>
+        <a href="#how-it-started" class="nav-link">Awal Mula</a>
+        <a href="#memories" class="nav-link">Dokumentasi</a>
+        <a href="#reflection" class="nav-link">Refleksi</a>
+        <a href="#private-letters" class="nav-link nav-link-highlight">Surat Pribadi</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="music-toggle" class="nav-btn-music" type="button" aria-label="Putar musik: Bintang di Hati — Melly Goeslaw" title="Putar musik: Bintang di Hati — Melly Goeslaw">
+          <span class="music-icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </span>
+        </button>
+        <!-- Volume Control -->
+        <div class="volume-control" id="volume-control" aria-label="Pengatur volume" title="Atur volume">
+          <svg class="volume-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path class="vol-wave vol-wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path class="vol-wave vol-wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <input
+            type="range"
+            id="volume-slider"
+            class="volume-slider"
+            min="0"
+            max="100"
+            value="35"
+            step="5"
+            aria-label="Volume"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="35"
+          />
+        </div>
+        <button id="nav-menu-toggle" class="nav-mobile-toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════════
+         OPENING SCREEN (ARCHIVAL COVER)
+         ═══════════════════════════════════════════════════ -->
+    <section id="opening" aria-label="Sampul Arsip Geng Kapak">
+      <div class="op-grain" aria-hidden="true"></div>
+
+      <div class="op-inner">
+        <div class="op-eyebrow fade-in-up">
+          <span class="op-eyebrow-line"></span>
+          <span>Catatan Pribadi Hilya · untuk Uwa, Umi, Tyan, & Nass</span>
+          <span class="op-eyebrow-line"></span>
+        </div>
+
+        <h1 class="op-title fade-in-up delay-1">geng kapak</h1>
+
+        <p class="op-subtitle fade-in-up delay-2">
+          Dulu kita cuma lima orang yang bertemu biasa saat awal kuliah, tanpa pernah tahu kalau pertemuan itu bakal jadi salah satu hal paling berharga di hidupku.
+        </p>
+
+        <!-- Baris 5 foto polaroid anggota -->
+        <div class="op-members-wrapper fade-in-up delay-3">
+          <div id="opening-members-row" class="op-members-row"></div>
+        </div>
+
+        <div class="op-cta-box fade-in-up delay-4">
+          <button id="cta-enter" class="editorial-btn" type="button">
+            <span>Buka Cerita Kita</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <p class="op-hint">sebuah catatan terima kasih untuk empat sahabat yang membuat masa kuliah terasa ramah</p>
+        </div>
+      </div>
+
+      <div class="op-bottom-stamp" aria-hidden="true">
+        <span>Koleksi 2023 — Sekarang</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         BAB I — THE FIVE OF US (TENTANG KITA)
+         ═══════════════════════════════════════════════════ -->
+    <section id="the-five-of-us" class="editorial-section" aria-labelledby="heading-five">
+      <div class="section-container">
+        <header class="section-header">
+          <span class="chapter-tag fade-in-up">Bab I · Tentang Kita</span>
+          <h2 id="heading-five" class="section-title fade-in-up delay-1">
+            Empat orang yang ingin<br /><em>kuceritakan</em>
+          </h2>
+          <div class="section-rule fade-in-up delay-2"></div>
+          <p class="section-lead fade-in-up delay-2">
+            Catatan kecil untuk empat orang yang kehadirannya membuat hari-hari kuliah yang melelahkan selalu terasa menyenangkan untuk dijalani.
+          </p>
+        </header>
+
+        <!-- 4 Kartu Detail Sahabat -->
+        <div id="members-detail-grid" class="members-detail-grid" role="list"></div>
+
+        <div class="storyteller-note fade-in-up delay-2">
+          <div class="stn-seal">H</div>
+          <p class="stn-text">
+            <strong>Catatan Hilya:</strong> Di antara kita berlima, aku sering merasa jadi orang yang paling beruntung karena pernah dipertemukan dengan kalian berempat di waktu yang tepat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         BAB II — HOW IT STARTED (AWAL MULA)
+         ═══════════════════════════════════════════════════ -->
+    <section id="how-it-started" class="editorial-section alt-bg" aria-labelledby="heading-started">
+      <div class="section-container">
+        <header class="section-header">
+          <span class="chapter-tag fade-in-up">Bab II · Awal Mula</span>
+          <h2 id="heading-started" class="section-title fade-in-up delay-1">
+            Gimana Semua Ini<br /><em>Bisa Terjadi</em>
+          </h2>
+          <div class="section-rule fade-in-up delay-2"></div>
+        </header>
+
+        <div class="story-layout">
+          <div class="story-narrative">
+            <p class="story-p fade-in-up">
+              Kalau diingat-ingat lagi, lucu ya. Awalnya kita cuma lima orang yang kenalan biasa pas masa awal kuliah tahun 2023. Masih sama-sama canggung, bingung nyari gedung kelas, dan belum ada kepikiran bakal sedekat ini.
+            </p>
+            <p class="story-p fade-in-up delay-1">
+              Karena sering ada di kelas yang sama dan mulai sering nunggu bareng di selasar FPIPS, akhirnya kita bikin grup WhatsApp. Waktu itu beneran nggak ada niat sedikit pun buat bikin "geng" atau kelompok khusus.
+            </p>
+            <p class="story-p highlight-p fade-in-up delay-2">
+              Sampai suatu hari, tiba-tiba Deffran nyeletuk julukan <em>"geng kapak"</em> ke kita. Nama yang super random, tanpa filosofi muluk-muluk, tapi entah kenapa malah nempel erat dan keterusan kita pakai sampai sekarang.
+            </p>
+
+            <div class="story-timeline fade-in-up delay-3" aria-label="Kronologi Awal Mula">
+              <div class="timeline-step">
+                <span class="tl-marker" aria-hidden="true"></span>
+                <div class="tl-content">
+                  <h3 class="tl-title">Agustus 2023 — PMB</h3>
+                  <p class="tl-desc">Bertemu pertama kali di kampus, kenalan biasa sebagai mahasiswa baru.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <span class="tl-marker" aria-hidden="true"></span>
+                <div class="tl-content">
+                  <h3 class="tl-title">Semester Awal</h3>
+                  <p class="tl-desc">Mulai sering jalan bareng, nunggu kelas di selasar, dan bikin grup obrolan.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <span class="tl-marker" aria-hidden="true"></span>
+                <div class="tl-content">
+                  <h3 class="tl-title">Celetukan Deffran</h3>
+                  <p class="tl-desc">Diberi julukan "Geng Kapak" yang awalnya dianggap candaan lewat.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <span class="tl-marker" aria-hidden="true"></span>
+                <div class="tl-content">
+                  <h3 class="tl-title">Hingga Sekarang</h3>
+                  <p class="tl-desc">Keterusan pakai nama itu sampai masuk semester akhir bersama-sama.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-visual fade-in-up delay-2">
+            <figure class="story-polaroid-frame">
+              <div class="spf-photo">
+                <img src="assets/photos/pmb.jpeg" alt="Awal mula Geng Kapak saat PMB 2023" loading="lazy" />
+                <div class="spf-fallback" aria-hidden="true">
+                  <span class="spf-stamp">'23 08 28</span>
+                  <span class="spf-title">Awal dari Segalanya</span>
+                </div>
+              </div>
+              <figcaption class="spf-caption">
+                “Waktu foto ini diambil pas PMB, kita belum tahu kalau empat orang di foto ini bakal jadi orang-orang paling berharga di masa kuliahku.”
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         BAB III — DOKUMENTASI KENANGAN (EDITORIAL MEMORY ARCHIVE)
+         ═══════════════════════════════════════════════════ -->
+    <section id="memories" class="editorial-section alt-bg" aria-labelledby="heading-memories">
+      <!-- Subtle Playful Scrapbook Background Doodles (Faint & Translucent) -->
+      <div class="memories-bg-doodles" aria-hidden="true">
+        <!-- Top area near header -->
+        <svg class="bg-doodle doodle-sparkle" style="top: 1.5%; left: 3%;" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="1.8"><path d="M12 2C12 7.5 16.5 12 22 12C16.5 12 12 16.5 12 22C12 16.5 7.5 12 2 12C7.5 12 12 7.5 12 2Z"/></svg>
+        <div class="bg-tape tape-rose" style="top: 3.5%; right: 3.5%; transform: rotate(10deg);"></div>
+        <svg class="bg-doodle doodle-heart" style="top: 5.5%; right: 7%;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="bg-doodle doodle-flower" style="top: 8%; left: 2.5%;" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="var(--accent-gold)" stroke-width="1.6" stroke-linecap="round"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="8" r="3.5"/><circle cx="23" cy="12.5" r="3.5"/><circle cx="21" cy="21" r="3.5"/><circle cx="11" cy="21" r="3.5"/><circle cx="9" cy="12.5" r="3.5"/></svg>
+
+        <!-- Upper photo gallery area -->
+        <svg class="bg-doodle doodle-squiggle" style="top: 14%; right: 2.5%;" width="46" height="18" viewBox="0 0 48 18" fill="none" stroke="var(--accent-gold)" stroke-width="1.8" stroke-linecap="round"><path d="M2 10c6-8 14-8 18 0s12 8 18 0 6-5 8-5"/></svg>
+        <div class="bg-tape tape-gold" style="top: 19%; left: 3%; transform: rotate(-7deg);"></div>
+        <svg class="bg-doodle doodle-star" style="top: 24%; right: 3%;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+        <svg class="bg-doodle doodle-heart" style="top: 28%; left: 2%;" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sienna)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+        <!-- Mid photo gallery area -->
+        <svg class="bg-doodle doodle-sprout" style="top: 34%; right: 2.5%;" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sage)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10M12 10C12 5 7 3 4 5c-1 4 1 9 8 5zM12 14c2-3 6-3 8-1 1 3-1 7-8 3z"/></svg>
+        <div class="bg-tape tape-sage" style="top: 39%; left: 2.5%; transform: rotate(8deg);"></div>
+        <svg class="bg-doodle doodle-sparkle" style="top: 44%; right: 3.5%;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="1.8"><path d="M12 2C12 7.5 16.5 12 22 12C16.5 12 12 16.5 12 22C12 16.5 7.5 12 2 12C7.5 12 12 7.5 12 2Z"/></svg>
+        <svg class="bg-doodle doodle-arc" style="top: 49%; left: 2%;" width="34" height="18" viewBox="0 0 36 20" fill="none" stroke="var(--accent-gold)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 4"><path d="M3 5c8 10 22 10 30 0"/></svg>
+
+        <!-- Transition to video memories area -->
+        <div class="bg-tape tape-sienna" style="top: 56%; right: 3%; transform: rotate(-8deg);"></div>
+        <svg class="bg-doodle doodle-flower" style="top: 61%; left: 3%;" width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="var(--accent-gold)" stroke-width="1.6" stroke-linecap="round"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="8" r="3.5"/><circle cx="23" cy="12.5" r="3.5"/><circle cx="21" cy="21" r="3.5"/><circle cx="11" cy="21" r="3.5"/><circle cx="9" cy="12.5" r="3.5"/></svg>
+        <svg class="bg-doodle doodle-heart" style="top: 67%; right: 2%;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+        <!-- Video memories gallery area -->
+        <div class="bg-tape tape-rose" style="top: 73%; left: 2.5%; transform: rotate(7deg);"></div>
+        <svg class="bg-doodle doodle-squiggle" style="top: 79%; right: 2.5%;" width="44" height="18" viewBox="0 0 48 18" fill="none" stroke="var(--accent-gold)" stroke-width="1.8" stroke-linecap="round"><path d="M2 10c6-8 14-8 18 0s12 8 18 0 6-5 8-5"/></svg>
+        <svg class="bg-doodle doodle-star" style="top: 84%; left: 3%;" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+        <svg class="bg-doodle doodle-sprout" style="top: 89%; right: 3%;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sage)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V10M12 10C12 5 7 3 4 5c-1 4 1 9 8 5zM12 14c2-3 6-3 8-1 1 3-1 7-8 3z"/></svg>
+        <div class="bg-tape tape-gold" style="top: 94%; right: 4%; transform: rotate(-6deg);"></div>
+        <svg class="bg-doodle doodle-sparkle" style="top: 97%; left: 4%;" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="1.8"><path d="M12 2C12 7.5 16.5 12 22 12C16.5 12 12 16.5 12 22C12 16.5 7.5 12 2 12C7.5 12 12 7.5 12 2Z"/></svg>
+      </div>
+
+      <div class="section-container">
+        <header class="section-header text-center">
+          <span class="chapter-tag fade-in-up">Bab III · Dokumentasi Kenangan</span>
+          <h2 id="heading-memories" class="section-title fade-in-up delay-1">
+            Arsip Perjalanan & Cerita Kita
+          </h2>
+          <p class="section-subtitle center fade-in-up delay-2">
+            Nggak semua momen sempat tertangkap kamera, tapi setiap tawa di selasar FPIPS, jalan malam di Braga, sampai hal-hal random yang kita lewati bersama tersimpan rapi di sini—sebagai bukti betapa berharganya hari-hari itu buat aku.
+          </p>
+          <div class="section-rule center fade-in-up delay-2"></div>
+
+          <!-- Kategori Filter Editorial -->
+          <div class="gallery-filters fade-in-up delay-3" role="tablist" aria-label="Filter galeri foto">
+            <button class="gallery-filter-btn active" role="tab" aria-selected="true" data-category="all">Semua Foto</button>
+            <button class="gallery-filter-btn" role="tab" aria-selected="false" data-category="braga">Braga Diaries</button>
+            <button class="gallery-filter-btn" role="tab" aria-selected="false" data-category="campus">Kampus & Gerlong</button>
+            <button class="gallery-filter-btn" role="tab" aria-selected="false" data-category="moments">Momen Spesial</button>
+            <button class="gallery-filter-btn" role="tab" aria-selected="false" data-category="candid">Koleksi Candid</button>
+          </div>
+        </header>
+
+        <!-- Dynamic Editorial Photo Grid -->
+        <div id="memory-grid" class="editorial-gallery-grid" role="list"></div>
+
+        <!-- SUB-BAGIAN: CUPLIKAN VIDEO DOKUMENTASI -->
+        <div class="video-gallery-section fade-in-up" id="video-memories">
+          <!-- Video Grid Container -->
+          <div id="video-grid" class="video-grid" role="list"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════
+         BAB IV — RUANG TEDUH & REFLEKSI (TENTANG RASA BERUNTUNG & HARI ESOK)
+         ═══════════════════════════════════════════════════ -->
+    <section id="reflection" class="editorial-section reflection-section" aria-labelledby="heading-reflection">
+      <div class="section-container">
+        <header class="section-header text-center">
+          <span class="chapter-tag fade-in-up">Bab IV · Ruang Teduh</span>
+          <h2 id="heading-reflection" class="section-title fade-in-up delay-1">
+            Tentang Hal-Hal Kecil<br /><em>& Rasa Syukur</em>
+          </h2>
+          <div class="section-rule center fade-in-up delay-2"></div>
+        </header>
+
+        <div class="reflection-letter fade-in-up delay-2">
+          <blockquote class="rf-quote">
+            "Dulu aku kira masa kuliah cuma soal bertahan dan menyelesaikan tugas. Aku nggak pernah menyangka kalau di perjalanan ini, aku bakal menemukan orang-orang yang bikin aku merasa begitu diterima."
+          </blockquote>
+
+          <div class="rf-body">
+            <p>
+              Kalau diingat lagi, aku datang ke awal perkuliahan dengan hati yang cukup berjarak. Aku nggak punya banyak ekspektasi tentang pertemanan, dan sempat percaya kalau fase ini mungkin bakal kulewati sendirian aja. Ada bagian dari diriku yang ragu—apakah di tempat baru ini, aku bisa menemukan orang-orang yang tulus dan mau menerimaku apa adanya.
+            </p>
+            <p>
+              Tapi kehadiran kalian pelan-pelan meruntuhkan semua keraguan itu. Bukan lewat hal-hal yang megah atau janji yang muluk-muluk, melainkan lewat kehadiran yang sederhana tapi selalu ada. Kalian menerima kekuranganku tanpa menuntutku jadi orang lain. Di hari-hari di mana aku merasa lelah, bingung, atau nggak yakin sama diri sendiri, ada kalian yang diam-diam bikin duniaku terasa jauh lebih ramah dan aman.
+            </p>
+            <p>
+              Dari luar, kita mungkin cuma terlihat seperti lima orang yang kebetulan sering jalan bareng dan ngetawain hal-hal receh. Tapi buatku, persahabatan ini jauh lebih dalam dari itu. Kalian adalah alasan kenapa masa kuliah yang berat ini punya banyak ruang hangat untuk diingat, dan alasan kenapa aku hari ini bisa percaya lagi pada ketulusan.
+            </p>
+            <p class="rf-closing">
+              Ada hal-hal yang mungkin jarang—atau terlalu malu—untuk kusampaikan langsung pas kita lagi kumpul. Karena itu, sebelum langkah kita berlanjut ke babak berikutnya, aku menuliskan sebuah catatan kecil untuk kalian satu per satu. 🤍
+            </p>
+          </div>
+
+          <div class="future-promise-banner fade-in-up delay-3">
+            <p class="fpb-quote">
+              “Terima kasih sudah membuat masa kuliahku terasa begitu hangat.<br />
+              Sampai kapan pun, dipertemukan dengan kalian berempat adalah salah satu hal paling kusyukuri di hidup ini.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         BAB V — SURAT PRIBADI (AMPLOP BERSEGEL)
+         ═══════════════════════════════════════════════════ -->
+    <section id="private-letters" class="editorial-section letters-section" aria-labelledby="heading-letters">
+      <div class="section-container">
+        <header class="section-header text-center">
+          <span class="chapter-tag fade-in-up">Bab V · Surat Pribadi</span>
+          <h2 id="heading-letters" class="section-title fade-in-up delay-1">
+            Ada yang Tertulis<br /><em>untuk Masing-Masing</em>
+          </h2>
+          <p class="section-subtitle center fade-in-up delay-2">
+            Empat amplop bersegel untuk empat orang yang sangat berarti di hidupku. Buka amplop milikmu dengan tanggal lahirmu ya.
+          </p>
+          <div class="section-rule center fade-in-up delay-2"></div>
+        </header>
+
+        <!-- 4 Amplop Bersegel Personal -->
+        <div id="envelopes-grid" class="envelopes-grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- MODAL SURAT PRIBADI -->
+    <div id="letter-modal" class="letter-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="unlock-title">
+      <div class="letter-modal-backdrop"></div>
+      <div class="letter-modal-dialog">
+        <button id="modal-close" class="letter-modal-close" type="button" aria-label="Tutup surat">✕</button>
+
+        <!-- Tahap Buka Segel -->
+        <div id="unlock-step" class="unlock-step">
+          <div class="unlock-wax-badge" aria-hidden="true">✉️</div>
+          <h3 id="unlock-title" class="unlock-title">Surat untuk <span id="unlock-for-name">Sahabat</span></h3>
+          <p class="unlock-desc">Masukkan tanggal lahirmu untuk membuka segel amplop ini.</p>
+
+          <div class="unlock-input-wrap">
+            <label for="unlock-input" class="sr-only">Tanggal lahir (DD/MM/YYYY)</label>
+            <input
+              type="text"
+              id="unlock-input"
+              class="unlock-input"
+              placeholder="contoh: 21/09/2004"
+              maxlength="14"
+              inputmode="numeric"
+              autocomplete="off"
+            />
+          </div>
+
+          <p id="unlock-error" class="unlock-error-msg" role="alert" aria-live="polite"></p>
+
+          <button id="unlock-submit" class="unlock-submit-btn editorial-btn" type="button">
+            Buka Segel Surat
+          </button>
+          <p class="unlock-privacy-hint">Disegel secara intim khusus untukmu · Tanpa pelacakan</p>
+        </div>
+
+        <!-- Tahap Tampilan Kertas Surat (Stationery) -->
+        <div id="letter-content" class="letter-content hidden"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         EPILOG & FINAL SCREEN
+         ═══════════════════════════════════════════════════ -->
+    <section id="final-screen" class="final-screen-section" aria-label="Penutup Memory Book">
+      <div class="final-screen-inner">
+        <span class="final-eyebrow fade-in-up">Arsip Abadi</span>
+        <h2 class="final-title fade-in-up delay-1">geng kapak</h2>
+        <p class="final-members-subtitle fade-in-up delay-2">
+          Hilya · Uwa · Umi · Tyan · Nass
+        </p>
+
+        <!-- Baris Polaroid Penutup Seluruh Anggota -->
+        <div id="final-members-row" class="final-members-row fade-in-up delay-3"></div>
+
+        <div class="final-blessing fade-in-up delay-3">
+          <p class="final-blessing-text">
+            Terima kasih sudah hadir dan mewarnai perjalanan masa kuliahku.<br />
+            Ke mana pun langkah membawa kita nanti, kalian berempat akan selalu punya tempat yang hangat dan berharga di hidupku.
+          </p>
+          <p class="final-signature">
+            dengan rasa syukur yang tulus,<br />
+            <span>hilya 🤍</span>
+          </p>
+        </div>
+
+        <footer class="final-colophon fade-in-up delay-4">
+          <p>Geng Kapak Memory Book · Dibuat dengan penuh kasih oleh Hilya · 2023 — Sekarang</p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════
+       LIGHTBOX (RESPONSIF & AKSESIBEL)
+       ═══════════════════════════════════════════════════ -->
+  <div id="lightbox" class="analog-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Penampil Foto Kenangan">
+    <div class="lb-backdrop"></div>
+    <div class="lb-dialog">
+      <button class="lb-close" type="button" aria-label="Tutup lightbox">✕</button>
+
+      <div class="lb-stage">
+        <div class="lb-img-box"></div>
+      </div>
+
+      <div class="lb-caption-bar">
+        <div class="lb-meta-info">
+          <span class="lb-counter"></span>
+          <span class="lb-date"></span>
+          <h3 class="lb-title"></h3>
+          <p class="lb-caption"></p>
+        </div>
+
+        <div class="lb-nav-controls">
+          <button class="lb-prev lb-nav-btn" type="button" aria-label="Foto sebelumnya">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="lb-next lb-nav-btn" type="button" aria-label="Foto berikutnya">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Orchestrator -->
+  <script type="module" src="src/js/main.js?v=20"></script>
+
+</body>
+</html>
