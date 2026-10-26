@@ -25,7 +25,8 @@ export function getFilteredPhotos() {
 }
 
 /**
- * Membuat kartu foto editorial minimalis
+ * Membuat kartu foto scrapbook estetik.
+ * Foto tampil utuh dan berada tepat di tengah dengan object-fit contain.
  */
 export function createPhotoCard(photo, index, options = {}) {
   const card = document.createElement('article');
@@ -40,7 +41,7 @@ export function createPhotoCard(photo, index, options = {}) {
 
   card.innerHTML = `
     <div class="epc-frame">
-      <div class="epc-img-box aspect-${photo.aspect || 'portrait'}">
+      <div class="epc-img-box">
         <img
           class="epc-img"
           src="${photo.src}"
@@ -51,7 +52,6 @@ export function createPhotoCard(photo, index, options = {}) {
       </div>
     </div>
   `;
-
 
   // Fallback handler: jika foto tidak ada, hapus kartu
   const imgEl = card.querySelector('.epc-img');
@@ -117,7 +117,7 @@ export function renderGalleryGrid() {
   }
 
   filtered.forEach((photo, idx) => {
-    container.appendChild(createPhotoCard(photo, idx));
+    container.appendChild(createPhotoCard(photo, idx, { customList: filtered }));
   });
 }
 

@@ -1083,20 +1083,27 @@ img {
 
 /* ── BAB III. DOKUMENTASI KENANGAN ─────────────────────────────────── */
 
+/* ── BAB III. DOKUMENTASI KENANGAN ─────────────────────────────────── */
+
 #memories {
   position: relative;
   overflow: hidden;
 }
 
+/* Warm paper scrapbook background with subtle grain texture */
 #memories.alt-bg {
-  background-color: var(--bg-secondary);
+  background-color: #FAF6F0; /* Soft warm ivory paper */
   background-image: 
-    radial-gradient(circle at 12% 10%, rgba(192, 163, 110, 0.045) 0%, transparent 40%),
-    radial-gradient(circle at 88% 50%, rgba(184, 133, 138, 0.04) 0%, transparent 45%),
-    radial-gradient(circle at 20% 90%, rgba(129, 142, 123, 0.04) 0%, transparent 40%);
+    /* Paper grain — very fine noise overlay */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.038'/%3E%3C/svg%3E"),
+    /* Warm color tints: beige, gold, dusty pink, and sage */
+    radial-gradient(ellipse at 8% 6%, rgba(200, 168, 115, 0.08) 0%, transparent 48%),
+    radial-gradient(ellipse at 92% 38%, rgba(206, 158, 163, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 12% 85%, rgba(138, 158, 126, 0.06) 0%, transparent 44%),
+    radial-gradient(ellipse at 88% 92%, rgba(200, 168, 115, 0.06) 0%, transparent 42%);
 }
 
-/* Subtle Scrapbook Background Doodles (Very Faint & Translucent) */
+/* Scrapbook Background Doodles (10–20% opacity as requested) */
 .memories-bg-doodles {
   position: absolute;
   top: 0;
@@ -1112,55 +1119,55 @@ img {
 
 .memories-bg-doodles .bg-doodle {
   position: absolute;
-  opacity: 0.32; /* Lembut, samar, transparan, menyatu anggun dengan background */
+  opacity: 0.16; /* Tepat 10–20% — samar, halus, tidak mengganggu foto */
   pointer-events: none;
-  filter: drop-shadow(0 1px 1px rgba(36, 34, 32, 0.04));
+  filter: drop-shadow(0 1px 1px rgba(60, 48, 38, 0.03));
   transition: opacity 0.3s ease;
 }
 
 .memories-bg-doodles .bg-tape {
   position: absolute;
-  width: 68px;
-  height: 18px;
+  width: 72px;
+  height: 20px;
   border-radius: 2px;
-  opacity: 0.35; /* Selotip samar transparan seperti selotip asli */
+  opacity: 0.18; /* Tepat 10–20% — seperti selotip kertas washi transparan */
   pointer-events: none;
-  box-shadow: 0 1px 3px rgba(36, 34, 32, 0.05);
+  box-shadow: 0 1px 3px rgba(60, 48, 38, 0.04);
 }
 
 .tape-gold {
-  background: rgba(192, 163, 110, 0.40);
-  border-left: 2px dashed rgba(192, 163, 110, 0.55);
-  border-right: 2px dashed rgba(192, 163, 110, 0.55);
+  background: rgba(200, 168, 115, 0.60);
+  border-left: 2px dashed rgba(200, 168, 115, 0.75);
+  border-right: 2px dashed rgba(200, 168, 115, 0.75);
 }
 
 .tape-rose {
-  background: rgba(184, 133, 138, 0.38);
-  border-left: 2px dashed rgba(184, 133, 138, 0.52);
-  border-right: 2px dashed rgba(184, 133, 138, 0.52);
+  background: rgba(206, 158, 163, 0.55);
+  border-left: 2px dashed rgba(206, 158, 163, 0.70);
+  border-right: 2px dashed rgba(206, 158, 163, 0.70);
 }
 
 .tape-sage {
-  background: rgba(129, 142, 123, 0.38);
-  border-left: 2px dashed rgba(129, 142, 123, 0.52);
-  border-right: 2px dashed rgba(129, 142, 123, 0.52);
+  background: rgba(138, 158, 126, 0.52);
+  border-left: 2px dashed rgba(138, 158, 126, 0.68);
+  border-right: 2px dashed rgba(138, 158, 126, 0.68);
 }
 
 .tape-sienna {
-  background: rgba(168, 103, 73, 0.36);
-  border-left: 2px dashed rgba(168, 103, 73, 0.50);
-  border-right: 2px dashed rgba(168, 103, 73, 0.50);
+  background: rgba(168, 115, 85, 0.50);
+  border-left: 2px dashed rgba(168, 115, 85, 0.65);
+  border-right: 2px dashed rgba(168, 115, 85, 0.65);
 }
 
 @media (max-width: 768px) {
   .memories-bg-doodles .bg-doodle {
-    opacity: 0.22;
-    transform: scale(0.75);
+    opacity: 0.12;
+    transform: scale(0.8);
   }
   .memories-bg-doodles .bg-tape {
-    opacity: 0.24;
-    width: 48px;
-    height: 13px;
+    opacity: 0.14;
+    width: 54px;
+    height: 14px;
   }
 }
 
@@ -1173,7 +1180,7 @@ img {
 /* Filter Tabs */
 .gallery-filters {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.65rem;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 1.8rem;
@@ -1182,24 +1189,26 @@ img {
 
 .gallery-filter-btn {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 400;
   color: var(--text-muted);
-  background: var(--bg-card);
-  border: 1px solid rgba(192, 163, 110, 0.25);
-  box-shadow: 0 2px 6px rgba(45, 38, 30, 0.03);
-  padding: 0.45rem 1.25rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(192, 163, 110, 0.28);
+  box-shadow: 0 2px 6px rgba(45, 38, 30, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  padding: 0.42rem 1.2rem;
   border-radius: var(--radius-full);
   transition: all 0.24s var(--ease-editorial);
   cursor: pointer;
   letter-spacing: 0.015em;
+  backdrop-filter: blur(4px);
 }
 
 .gallery-filter-btn:hover {
   border-color: var(--accent-gold);
   color: var(--text-main);
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(192, 163, 110, 0.15);
+  box-shadow: 0 5px 12px rgba(192, 163, 110, 0.18);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .gallery-filter-btn.active {
@@ -1207,118 +1216,163 @@ img {
   color: var(--bg-primary);
   border-color: var(--text-main);
   font-weight: 500;
-  box-shadow: 0 4px 12px rgba(36, 34, 32, 0.16);
+  box-shadow: 0 4px 14px rgba(36, 34, 32, 0.20);
   transform: translateY(-1px);
 }
 
-/* ── Photo Grid — Spacious, Balanced Editorial Scrapbook Grid ───────── */
+/* ─────────────────────────────────────────────────────────────────────
+   PHOTO GRID — Scrapbook Album Grid Seimbang & Rapi
+   Ukuran kartu konsisten, proporsi harmonis, dan jarak rapi.
+   ───────────────────────────────────────────────────────────────────── */
 .editorial-gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 2.25rem;
 }
 
 @media (max-width: 900px) {
   .editorial-gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
+    gap: 1.25rem;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .editorial-gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
-/* Photo Card — Scrapbook Matte Frame Aesthetic */
+/* ─────────────────────────────────────────────────────────────────────
+   PHOTO CARD — Warm Scrapbook Album Mount & Matte Frame
+   - Foto terlihat 100% utuh tanpa terpotong (object-fit: contain)
+   - Berada tepat di tengah (horizontal & vertikal)
+   - Background lembut matte passe-partout menyatu dengan desain web
+   - Ukuran seimbang, bayangan lembut bertingkat
+   ───────────────────────────────────────────────────────────────────── */
 .editorial-photo-card {
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
-  padding: 10px;
-  border-radius: 8px;
+  background: linear-gradient(165deg, #FAF7F2 0%, #F5EFE6 100%);
+  padding: 10px 10px 14px;
+  border-radius: 12px;
   border: 1px solid rgba(192, 163, 110, 0.22);
-  box-shadow: 0 4px 16px rgba(45, 38, 30, 0.05), 0 1px 3px rgba(45, 38, 30, 0.03);
+  box-shadow: 
+    0 4px 16px rgba(65, 52, 40, 0.06),
+    0 1px 4px rgba(65, 52, 40, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
   overflow: hidden;
   cursor: pointer;
   outline: none;
-  transition: transform 0.28s var(--ease-editorial), box-shadow 0.28s ease, border-color 0.28s ease;
-  aspect-ratio: 1 / 1;
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.32s ease, 
+              border-color 0.28s ease;
   position: relative;
+  height: 330px;
+  box-sizing: border-box;
 }
 
-@media (max-width: 520px) {
+/* Micro-rotasi halus per-card untuk nuansa album kenangan persahabatan */
+.editorial-photo-card:nth-child(4n+1) {
+  transform: rotate(-0.4deg);
+}
+
+.editorial-photo-card:nth-child(4n+2) {
+  transform: rotate(0.35deg);
+}
+
+.editorial-photo-card:nth-child(4n+3) {
+  transform: rotate(-0.3deg);
+}
+
+.editorial-photo-card:nth-child(4n) {
+  transform: rotate(0.3deg);
+}
+
+@media (max-width: 600px) {
   .editorial-photo-card {
-    padding: 6px;
-    border-radius: 6px;
+    height: 320px;
+    padding: 8px 8px 12px;
+    border-radius: 10px;
+    transform: none !important;
   }
 }
 
 .editorial-photo-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 28px rgba(45, 38, 30, 0.11), 0 2px 8px rgba(192, 163, 110, 0.18);
-  border-color: rgba(192, 163, 110, 0.55);
-  z-index: 2;
-}
-
-.editorial-photo-card:nth-child(even):hover {
-  transform: translateY(-5px) rotate(0.6deg);
-}
-
-.editorial-photo-card:nth-child(odd):hover {
-  transform: translateY(-5px) rotate(-0.6deg);
+  transform: translateY(-6px) rotate(0deg) !important;
+  box-shadow: 
+    0 16px 32px rgba(65, 52, 40, 0.11),
+    0 4px 12px rgba(192, 163, 110, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-color: rgba(192, 163, 110, 0.48);
+  z-index: 5;
 }
 
 .editorial-photo-card:focus-visible {
   outline: 2px solid var(--accent-gold);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
+/* Bingkai dalam (Matte passe-partout mount) */
 .epc-frame {
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
+  background: #F4EFE6;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.55) 0%, rgba(235, 227, 215, 0.55) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .epc-frame {
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 6px;
   }
 }
 
 .epc-img-box {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background: #EAE5DE;
-  border-radius: inherit;
+  position: relative;
+  border-radius: 5px;
 }
 
+/* Gambar foto utuh, berada di tengah, tidak terpotong */
 .epc-img {
+  max-width: 100%;
+  max-height: 100%;
   width: 100%;
   height: 100%;
-  display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  border-radius: inherit;
-  filter: contrast(1.02) saturate(1.02);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  display: block;
+  margin: auto;
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 6px rgba(50, 40, 30, 0.08)) contrast(1.02) saturate(1.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
 .editorial-photo-card:hover .epc-img {
-  transform: scale(1.035);
-  filter: contrast(1.04) saturate(1.06);
+  transform: scale(1.02);
+  filter: drop-shadow(0 4px 12px rgba(50, 40, 30, 0.14)) contrast(1.03) saturate(1.05);
 }
 
 .gallery-empty-state {
   grid-column: 1 / -1;
-  padding: 3.5rem 1.5rem;
+  padding: 4rem 1.5rem;
   text-align: center;
   color: var(--text-muted);
   font-family: var(--font-sans);
@@ -1326,25 +1380,29 @@ img {
   font-style: italic;
 }
 
-/* ── Video Gallery Section — Subtle Elegant Divider & Spacing ──────── */
+/* ─────────────────────────────────────────────────────────────────────
+   VIDEO GALLERY SECTION — Cinematic Film Archive Aesthetic
+   Konsisten dengan scrapbook photo grid, berkesan dan elegan.
+   ───────────────────────────────────────────────────────────────────── */
 .video-gallery-section {
   margin-top: clamp(4rem, 7vw, 6rem);
   padding-top: clamp(2.5rem, 5vw, 4rem);
   position: relative;
 }
 
+/* Soft gold scrapbook divider */
 .video-gallery-section::before {
   content: '';
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(220px, 50%);
+  width: min(280px, 65%);
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-  opacity: 0.6;
+  background: linear-gradient(90deg, transparent, rgba(192, 163, 110, 0.75), transparent);
 }
 
+/* Video grid seimbang konsisten dengan galeri foto */
 .video-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1355,99 +1413,263 @@ img {
 @media (max-width: 900px) {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
+    gap: 1.25rem;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .video-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
-/* Video Card — Scrapbook Matte Frame Aesthetic, Consistent with Photos */
+/* ── Video Card — 35mm Analog Film Reel Souvenir Aesthetic ──────────── */
 .video-card {
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(192, 163, 110, 0.22);
-  box-shadow: 0 4px 16px rgba(45, 38, 30, 0.05), 0 1px 3px rgba(45, 38, 30, 0.03);
+  background: #1C1816; /* Deep warm espresso matte card */
+  padding: 10px 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(192, 163, 110, 0.25);
+  box-shadow: 
+    0 6px 22px rgba(26, 20, 16, 0.16),
+    0 1px 4px rgba(26, 20, 16, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   overflow: hidden;
-  cursor: default;
-  aspect-ratio: 1 / 1;
-  transition: transform 0.28s var(--ease-editorial), box-shadow 0.28s ease, border-color 0.28s ease;
+  cursor: pointer;
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.32s ease, 
+              border-color 0.3s ease;
   position: relative;
+  outline: none;
+  height: 330px;
+  box-sizing: border-box;
 }
 
-@media (max-width: 520px) {
+.video-card:nth-child(4n+1) {
+  transform: rotate(-0.4deg);
+}
+
+.video-card:nth-child(4n+2) {
+  transform: rotate(0.35deg);
+}
+
+.video-card:nth-child(4n+3) {
+  transform: rotate(-0.25deg);
+}
+
+.video-card:nth-child(4n) {
+  transform: rotate(0.3deg);
+}
+
+@media (max-width: 600px) {
   .video-card {
-    padding: 6px;
-    border-radius: 6px;
+    padding: 8px 8px 12px;
+    border-radius: 10px;
+    transform: none !important;
+    height: 320px;
   }
 }
 
 .video-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 28px rgba(45, 38, 30, 0.11), 0 2px 8px rgba(192, 163, 110, 0.18);
+  transform: translateY(-6px) rotate(0deg) !important;
+  box-shadow: 
+    0 20px 38px rgba(26, 20, 16, 0.26),
+    0 4px 14px rgba(192, 163, 110, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
   border-color: rgba(192, 163, 110, 0.55);
-  z-index: 2;
+  z-index: 5;
 }
 
-.video-card:nth-child(even):hover {
-  transform: translateY(-5px) rotate(0.6deg);
+.video-card:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
 }
 
-.video-card:nth-child(odd):hover {
-  transform: translateY(-5px) rotate(-0.6deg);
-}
-
-/* Video Player Wrap — Clean Charcoal Mat Inside Ivory Frame */
+/* Video Player Wrap */
 .video-player-wrap {
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #141210;
+  background: #0E0C0A;
   overflow: hidden;
   position: relative;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .video-player-wrap {
-    border-radius: 4px;
+    border-radius: 6px;
+    height: 100%;
   }
 }
 
-/* Video element — Contain mode retains true natural ratio */
+/* Film Sprockets — Vintage 35mm Analog Film Detail */
+.film-sprockets {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-inline: 12px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.32;
+}
+
+.film-sprockets.top {
+  top: 3px;
+}
+
+.film-sprockets.bottom {
+  bottom: 3px;
+}
+
+.film-sprockets span {
+  display: block;
+  width: 7px;
+  height: 4px;
+  border-radius: 1px;
+  background: rgba(250, 248, 245, 0.32);
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Video Element */
 .memory-video {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: contain;
-  background: #141210;
+  object-fit: contain; /* Memastikan seluruh frame video terlihat utuh, tidak ada wajah terpotong */
+  background: #0E0C0A;
   border-radius: inherit;
   outline: none;
+  z-index: 1;
 }
 
 .memory-video:focus-visible {
   outline: 2px solid var(--accent-gold);
 }
 
+/* Cinematic Play Overlay */
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(18, 16, 14, 0.28) 0%, rgba(18, 16, 14, 0.72) 100%);
+  z-index: 4;
+  cursor: pointer;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.video-card:hover .video-play-overlay {
+  background: radial-gradient(circle at center, rgba(18, 16, 14, 0.12) 0%, rgba(18, 16, 14, 0.60) 100%);
+}
+
+.video-card.is-playing .video-play-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Retro Camcorder REC Badge */
+.cam-rec-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(14, 12, 10, 0.72);
+  border: 1px solid rgba(192, 163, 110, 0.35);
+  padding: 3px 9px;
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.rec-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #E54B4B;
+  box-shadow: 0 0 6px rgba(229, 75, 75, 0.85);
+  animation: recPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes recPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+.rec-text {
+  font-family: var(--font-sans);
+  font-size: 0.60rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(250, 248, 245, 0.92);
+}
+
+/* Golden Glassmorphic Play Button */
+.cine-play-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(28, 24, 20, 0.82);
+  border: 1.5px solid rgba(200, 168, 115, 0.88);
+  color: #FAF8F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 
+    0 5px 20px rgba(0, 0, 0, 0.40),
+    0 0 18px rgba(192, 163, 110, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.28s var(--ease-spring), box-shadow 0.28s ease, background 0.28s ease;
+}
+
+.video-card:hover .cine-play-btn {
+  transform: scale(1.12);
+  background: rgba(42, 36, 28, 0.92);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.50),
+    0 0 24px rgba(192, 163, 110, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.cine-play-btn .play-icon {
+  width: 22px;
+  height: 22px;
+  fill: rgba(200, 168, 115, 0.95);
+  margin-left: 4px;
+  transition: transform 0.22s ease, fill 0.22s ease;
+}
+
+.video-card:hover .cine-play-btn .play-icon {
+  fill: #FFE8A0;
+  transform: scale(1.08);
+}
+
 /* Empty State */
 .video-empty-state {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 3.5rem 1.5rem;
+  padding: 4rem 1.5rem;
   color: var(--text-muted);
   font-family: var(--font-sans);
   font-style: italic;
-  background: var(--bg-card);
-  border: 1px dashed rgba(192, 163, 110, 0.3);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(192, 163, 110, 0.35);
   border-radius: var(--radius-sm);
 }
 
@@ -2594,22 +2816,12 @@ img {
     padding-inline: 1rem;
   }
 
-  /* Gallery: single column on small phones for optimal breathing room */
+  /* Gallery: single column on mobile */
   .editorial-gallery-grid {
-    columns: 1 100%;
-    column-gap: 1.25rem;
-  }
-
-  .editorial-photo-card {
-    margin-bottom: 1.5rem;
-  }
-
-  .epc-body {
-    padding: 0.85rem 1.05rem 1rem;
-  }
-
-  .epc-title {
-    font-size: 1.05rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 1.25rem;
   }
 
   /* Envelopes: single column */
@@ -2794,24 +3006,10 @@ img {
 
   /* Gallery: single column */
   .editorial-gallery-grid {
-    columns: 1 100%;
-    column-gap: 0.85rem;
-  }
-
-  .editorial-photo-card {
-    margin-bottom: 1.25rem;
-  }
-
-  .epc-body {
-    padding: 0.9rem 1rem 1rem;
-  }
-
-  .epc-title {
-    font-size: 0.98rem;
-  }
-
-  .epc-caption {
-    font-size: 0.82rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 1rem;
   }
 
   /* Lightbox extra compact */

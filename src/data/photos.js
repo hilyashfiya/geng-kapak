@@ -36,7 +36,7 @@ export const curatedPhotos = [
     category: "braga",
     categoryLabel: "Braga Diaries",
     caption: "Jalan santai, foto sana-sini sampai kaki pegal tapi nggak ada yang mau udahan duluan.",
-    aspect: "landscape",
+    aspect: "portrait",
     filmStamp: "'25 04 11"
   },
   {
@@ -158,7 +158,7 @@ export const curatedPhotos = [
     category: "moments",
     categoryLabel: "Momen Spesial",
     caption: "Capek proker langsung berkurang tiap ketemu di lorong dan ngetawain hal receh bareng.",
-    aspect: "portrait",
+    aspect: "landscape",
     filmStamp: "'25 01 15"
   },
   {

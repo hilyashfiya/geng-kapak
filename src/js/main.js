@@ -1,8 +1,8 @@
-import { initOpening, setupImageWithFallback, initPhotoAutoWatcher } from './opening.js?v=20';
-import { initGallery, initLightbox } from './gallery.js?v=20';
-import { initLetters } from './letters.js?v=20';
-import { initMusicPlayer } from './music.js?v=20';
-import { initVideoGallery } from './video.js?v=20';
+import { initOpening, setupImageWithFallback, initPhotoAutoWatcher } from './opening.js?v=22';
+import { initGallery, initLightbox } from './gallery.js?v=22';
+import { initLetters } from './letters.js?v=22';
+import { initMusicPlayer } from './music.js?v=22';
+import { initVideoGallery } from './video.js?v=22';
 
 document.addEventListener('DOMContentLoaded', () => {
   initOpening();
