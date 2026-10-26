@@ -1,14 +1,18 @@
 // ============================================================
 // GENG KAPAK — Video Memories (Cinematic Film Reel Archive)
 // ============================================================
-// 1. Memuat video dari assets/photos/vidio/ secara lazy-load (IntersectionObserver).
-// 2. Sangat stabil di perangkat HP/Mobile (dukungan HTTP 206 Range + muted initial frame preview).
-// 3. Estetika 35mm Vintage Film Reel nostalgia dengan tombol play emas glassmorphism.
-// 4. Sinkronisasi audio otomatis dengan musik latar.
-// 5. Bebas judul, label, atau caption apapun sesuai arahan scrapbook minimalis.
+// Fix v2: Perbaikan URL encoding, lazy-load, dan mobile playback.
 // ============================================================
 
 import { videoList } from '../data/videos.js';
+
+/** Encode hanya nama file, bukan seluruh path */
+function encodePath(rawPath) {
+  return rawPath
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+}
 
 export function initVideoGallery() {
   const container = document.getElementById('video-grid');
@@ -25,24 +29,24 @@ export function initVideoGallery() {
     return;
   }
 
-  // IntersectionObserver untuk lazy-loading video (mencegah kelebihan beban koneksi & RAM pada HP)
+  // IntersectionObserver: lazy-load video saat mendekati viewport
   const videoObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const card = entry.target;
           const videoEl = card.querySelector('video');
-          if (videoEl && videoEl.dataset.src && !videoEl.src) {
-            videoEl.muted = true;
-            videoEl.playsInline = true;
-            videoEl.src = videoEl.dataset.src + '#t=0.001';
+          const rawSrc = videoEl && videoEl.dataset.src;
+          if (videoEl && rawSrc && !videoEl.dataset.loaded) {
+            videoEl.dataset.loaded = '1';
+            videoEl.src = encodePath(rawSrc);
             videoEl.load();
           }
           observer.unobserve(card);
         }
       });
     },
-    { rootMargin: '450px 0px', threshold: 0.01 }
+    { rootMargin: '500px 0px', threshold: 0.01 }
   );
 
   videoList.forEach((video, idx) => {
@@ -53,7 +57,8 @@ export function initVideoGallery() {
     card.setAttribute('aria-label', `Cuplikan Video Kenangan #${idx + 1}`);
     card.style.animationDelay = `${(idx % 6) * 0.05}s`;
 
-    const encodedSrc = `assets/photos/vidio/${encodeURIComponent(video.filename)}`;
+    // Path asli tanpa encoding — encoding dilakukan saat assign ke src
+    const rawSrc = `assets/photos/vidio/${video.filename}`;
 
     card.innerHTML = `
       <div class="video-player-wrap">
@@ -64,16 +69,15 @@ export function initVideoGallery() {
 
         <video
           class="memory-video"
-          data-src="${encodedSrc}"
+          data-src="${rawSrc.replace(/"/g, '&quot;')}"
           playsinline
           webkit-playsinline
           muted
-          preload="metadata"
-          controlslist="nodownload"
+          preload="none"
           aria-label="Video Kenangan"
         ></video>
 
-        <!-- Aesthetic Cinematic Play Overlay -->
+        <!-- Cinematic Play Overlay -->
         <div class="video-play-overlay">
           <!-- Retro Camcorder REC Badge -->
           <div class="cam-rec-badge" aria-hidden="true">
@@ -99,52 +103,64 @@ export function initVideoGallery() {
     const videoEl = card.querySelector('video');
     const overlay = card.querySelector('.video-play-overlay');
 
-    // 6 video teratas langsung disiapkan sumbernya agar preview frame langsung muncul di HP & desktop
+    // 6 video teratas: langsung load agar thumbnail frame muncul
     if (idx < 6 && videoEl) {
-      videoEl.muted = true;
-      videoEl.playsInline = true;
-      videoEl.src = encodedSrc + '#t=0.001';
+      videoEl.dataset.loaded = '1';
+      videoEl.src = encodePath(rawSrc);
+      videoEl.preload = 'metadata';
       videoEl.load();
     }
 
     const startPlayback = () => {
-      // Pause semua video lain yang sedang berputar
+      // Pause semua video lain
       document.querySelectorAll('.memory-video').forEach((v) => {
         if (v !== videoEl && !v.paused) {
           v.pause();
         }
       });
 
-      // Pastikan video src sudah termuat
-      if (!videoEl.src && videoEl.dataset.src) {
-        videoEl.src = videoEl.dataset.src;
+      // Pastikan src sudah diset (untuk video yang belum lazy-load)
+      if (!videoEl.src || videoEl.src === window.location.href) {
+        videoEl.dataset.loaded = '1';
+        videoEl.src = encodePath(rawSrc);
+        videoEl.preload = 'metadata';
+        videoEl.load();
       }
 
       card.classList.add('is-playing');
       overlay.style.opacity = '0';
       overlay.style.pointerEvents = 'none';
 
-      // Aktifkan suara (unmute) dan kontrol pemutaran
+      // Unmute dan tampilkan kontrol
       videoEl.muted = false;
       videoEl.controls = true;
 
-      const playPromise = videoEl.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn('Playback with audio blocked, fallback muted:', err);
-          videoEl.muted = true;
-          videoEl.controls = true;
-          videoEl.play();
-        });
+      const tryPlay = () => {
+        const promise = videoEl.play();
+        if (promise !== undefined) {
+          promise.catch(() => {
+            // Browser blokir autoplay dengan suara → fallback muted
+            videoEl.muted = true;
+            videoEl.play().catch(() => {});
+          });
+        }
+      };
+
+      // Jika metadata belum dimuat, tunggu dulu
+      if (videoEl.readyState < 1) {
+        videoEl.addEventListener('loadedmetadata', tryPlay, { once: true });
+      } else {
+        tryPlay();
       }
     };
 
-    // Klik pada overlay / tombol play langsung memutar video
+    // Klik overlay → putar
     overlay.addEventListener('click', (e) => {
       e.stopPropagation();
       startPlayback();
     });
 
+    // Keyboard
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -158,11 +174,8 @@ export function initVideoGallery() {
         overlay.style.opacity = '0';
         overlay.style.pointerEvents = 'none';
 
-        // Pause video lain & pause musik latar
         document.querySelectorAll('.memory-video').forEach((v) => {
-          if (v !== videoEl && !v.paused) {
-            v.pause();
-          }
+          if (v !== videoEl && !v.paused) v.pause();
         });
         window.dispatchEvent(new CustomEvent('video:playing'));
       });
@@ -172,7 +185,9 @@ export function initVideoGallery() {
         overlay.style.opacity = '1';
         overlay.style.pointerEvents = '';
 
-        const anyPlaying = Array.from(document.querySelectorAll('.memory-video')).some(v => !v.paused);
+        const anyPlaying = Array.from(document.querySelectorAll('.memory-video')).some(
+          (v) => !v.paused
+        );
         if (!anyPlaying) {
           window.dispatchEvent(new CustomEvent('video:paused'));
         }
@@ -182,15 +197,8 @@ export function initVideoGallery() {
         card.classList.remove('is-playing');
         overlay.style.opacity = '1';
         overlay.style.pointerEvents = '';
+        videoEl.controls = false;
         window.dispatchEvent(new CustomEvent('video:paused'));
-      });
-
-      // Fallback jika browser mobile gagal parsing fragment #t=0.001
-      videoEl.addEventListener('error', () => {
-        if (videoEl.src && videoEl.src.includes('#t=0.001')) {
-          videoEl.src = videoEl.dataset.src || encodedSrc;
-          videoEl.load();
-        }
       });
     }
 
