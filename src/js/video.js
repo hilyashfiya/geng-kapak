@@ -58,7 +58,7 @@ export function initVideoGallery() {
     card.style.animationDelay = `${(idx % 6) * 0.05}s`;
 
     // Path asli tanpa encoding — encoding dilakukan saat assign ke src
-    const rawSrc = `assets/photos/vidio/${video.filename}`;
+    const rawSrc = `assets/photos/Vidio/${video.filename}`;
 
     card.innerHTML = `
       <div class="video-player-wrap">
